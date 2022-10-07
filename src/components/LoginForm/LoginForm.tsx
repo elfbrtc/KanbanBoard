@@ -34,7 +34,7 @@ const LoginForm: FC<LoginFormProps> = (props) => {
         <img src={loginImg} alt="" />
       </div>
 
-      <div className='login inline-block align-baseline'>
+      <div className='login '>
       <Card title="Login">
         <Input
           onChange={handleChange}

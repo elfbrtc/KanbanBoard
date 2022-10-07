@@ -6,8 +6,6 @@ export const Styled = styled.div`
     padding-top: 20px;
     .login{
         width: 47%;
-        display: flex;
-        justify-content: space-evenly;
         background: #f5f5f5;
         border-radius: 40px;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -34,10 +32,5 @@ export const Styled = styled.div`
     }
     .login__img h1{
         margin:0;
-    }
-    img{
-        /* width:'50%';
-        height:'100%';
-        margin-right:'200px'; */
     }
 `

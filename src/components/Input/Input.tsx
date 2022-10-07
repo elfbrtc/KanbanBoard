@@ -1,6 +1,9 @@
 import React, { FC, useEffect, useState } from 'react'
 import { Styled } from './Input.styled'
 import { InputProps } from './Input.types'
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+
 
 const Input: FC<InputProps> = (props) => {
   const [isSecret, setIsSecret] = useState<boolean>(props.type === 'password')
@@ -32,19 +35,40 @@ const Input: FC<InputProps> = (props) => {
   }
 
   return (
-    <Styled style={props.style}>
+    <div className=''>
+      <Styled style={props.style}>
       {props.icon ? (
         <div className="icon">
           <span className="material-symbols-outlined">{props.icon}</span>
         </div>
       ) : null}
-      <input
+      <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '35ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      {/* <TextField id="outlined-basic" label={props.placeholder} variant="outlined" 
         name={props.name}
         onChange={handleChange}
         type={calculateType()}
         value={value}
-        placeholder={props.placeholder}
-      />
+        /> */}
+        
+        <TextField
+          required
+          id="standard-required"
+          name={props.name}
+          defaultValue="Hello World"
+          variant="standard"
+          onChange={handleChange}
+          type={calculateType()}
+          value={value}
+          label={props.placeholder}
+        />
+    </Box>
       {props.type === 'password' ? (
         <button onClick={handleClickEye} className="eye">
           <span className="material-symbols-outlined">
@@ -53,6 +77,8 @@ const Input: FC<InputProps> = (props) => {
         </button>
       ) : null}
     </Styled>
+    </div>
+    
   )
 }
 

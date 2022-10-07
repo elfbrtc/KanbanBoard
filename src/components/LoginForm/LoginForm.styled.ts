@@ -19,7 +19,8 @@ export const Styled = styled.div`
     .remember-forgot{
         display: flex;
         justify-content: space-between;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
+        width: 67%;
     }
     .register-links {
         text-align: center;

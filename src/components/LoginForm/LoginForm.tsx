@@ -9,6 +9,8 @@ import { InputProps } from '../Input/Input.types'
 import { Styled } from './LoginForm.styled'
 import { LoginFormProps, LoginFormValuesProps } from './LoginForm.types'
 import loginImg from '../../assets/login-image.png'
+import VisibilityIcon from '@mui/icons-material/Visibility';
+
 
 const LoginForm: FC<LoginFormProps> = (props) => {
   const [formValues, setFormValues] = useState<LoginFormValuesProps>({
@@ -32,7 +34,7 @@ const LoginForm: FC<LoginFormProps> = (props) => {
         <img src={loginImg} alt="" />
       </div>
 
-      <div className='login'>
+      <div className='login inline-block align-baseline'>
       <Card title="Login">
         <Input
           onChange={handleChange}
@@ -41,7 +43,6 @@ const LoginForm: FC<LoginFormProps> = (props) => {
           icon="person"
           type="text"
           placeholder="Enter your email"
-          style={{ marginBottom: '15px' }}
         />
         <Input
           onChange={handleChange}
@@ -50,9 +51,9 @@ const LoginForm: FC<LoginFormProps> = (props) => {
           icon="key"
           type="password"
           placeholder="Enter your password"
-          style={{ marginBottom: '15px' }}
+          style={{ marginLeft: '25px' }}
         />
-        <div className="remember-forgot">
+        <div className="remember-forgot  align-baseline">
           <Checkbox label="Remember me" />
           <a href="#" className="link">
             Forgot password

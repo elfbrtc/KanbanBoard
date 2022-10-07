@@ -2,9 +2,9 @@ import styled from 'styled-components'
 
 export const Styled = styled.div`
     background-color: white;
-    /* border-radius: 5px; */
+    background: #f5f5f5;
+    border-radius: 40px;
     width: 100%;
-    /* box-shadow: 0px 0px 5px 1px rgb(0 0 0 / 40%); */
     padding: 40px 200px;
     box-sizing: border-box;
     border: none;
@@ -18,5 +18,3 @@ export const Styled = styled.div`
     }
 
 `
-
-//5d7cc7

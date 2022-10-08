@@ -9,8 +9,6 @@ import { InputProps } from '../Input/Input.types'
 import { Styled } from './LoginForm.styled'
 import { LoginFormProps, LoginFormValuesProps } from './LoginForm.types'
 import loginImg from '../../assets/login-image.png'
-import VisibilityIcon from '@mui/icons-material/Visibility';
-
 
 const LoginForm: FC<LoginFormProps> = (props) => {
   const [formValues, setFormValues] = useState<LoginFormValuesProps>({
@@ -45,6 +43,7 @@ const LoginForm: FC<LoginFormProps> = (props) => {
           placeholder="Enter your email"
         />
         <Input
+          
           onChange={handleChange}
           name="password"
           value={formValues.password}
@@ -60,7 +59,7 @@ const LoginForm: FC<LoginFormProps> = (props) => {
           </a>
         </div>
 
-        <Button onClick={handleSubmit}>Login now</Button>
+        <Button onClick={handleSubmit} >Login now</Button>
         <p className="register-links">
           Don't have an account{' '}
           <Link className="link" to="/register">

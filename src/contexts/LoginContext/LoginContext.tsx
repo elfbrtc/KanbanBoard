@@ -26,13 +26,13 @@ export const LoginProvider: FC<PropsWithChildren> = ({ children }) => {
   const [state, setState] = useState<StateType>(initialState)
 
   useEffect(() => {
-    instance.defaults.headers.common['Authorization']='Bearer ' + state.token
     instance.interceptors.request.use((config) => {
       const _config = { ...config }
       _config.headers = {
         ...config.headers,
-        // authorization: 'Bearer ' + state.token, 
+        
       }
+      _config.headers.Authorization = 'Bearer ' + state.token
       return _config
     })
 
@@ -54,7 +54,9 @@ export const LoginProvider: FC<PropsWithChildren> = ({ children }) => {
   },[state.token])
 
   const login = (token: string, username: string) => {
+    console.log(token)
     setState({
+      
       username,
       token,
       isLoggedIn: true,
@@ -88,6 +90,7 @@ export const LoginProvider: FC<PropsWithChildren> = ({ children }) => {
 
 export const useLoginContext = () => {
   const { state, login, logout } = useContext(LoginContext)
+  console.log(state.isLoggedIn)
   return {
     username: state.username,
     isLoggedIn: state.isLoggedIn,

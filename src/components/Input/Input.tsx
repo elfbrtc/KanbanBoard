@@ -59,9 +59,7 @@ const Input: FC<InputProps> = (props) => {
         
         <TextField
           required
-          id="standard-required"
           name={props.name}
-          defaultValue="Hello World"
           variant="standard"
           onChange={handleChange}
           type={calculateType()}

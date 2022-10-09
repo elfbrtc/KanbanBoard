@@ -6,7 +6,6 @@ import {
   useContext,
   useEffect,
 } from 'react'
-import ReactDOM from 'react-dom/client'
 import instance from '../../services/http/scrumboard/instance'
 import { ContextType, StateType } from './types'
 

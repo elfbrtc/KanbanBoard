@@ -10,15 +10,17 @@ display: flex;
 align-items: center;
 justify-content: center;
 flex-direction: column;
+cursor:pointer;
 .icon{
     border-radius: 20px;
     background-color: #2dcee9;
     width: 40px;
-    height: 10vh;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
+    
  }
  .text{
     font-size: 14px;

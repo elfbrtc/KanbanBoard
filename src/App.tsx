@@ -8,12 +8,14 @@ import BoardsPage from './pages/BoardsPage'
 
 function App() {
   const { isLoggedIn } = useLoginContext()
+
+  
   return (
     <div className="App">
-       {isLoggedIn ? (
+       {!isLoggedIn ? (
       <BrowserRouter>
           <Routes>
-            <Route path="/" element={<LoginPage />} />
+            <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
           </Routes>
@@ -21,12 +23,12 @@ function App() {
          ): (
             <BrowserRouter>
               <Routes>
-                {/* <Route path="/" element={<Navigate to="/boards-page" />} /> */}
-                <Route path="/" element={<BoardsPage />} />
+              <Route path="/" element={<Navigate to="/boards-page" />} />
+                <Route path="/boards-page" element={<BoardsPage />} />
               </Routes>
             </BrowserRouter> 
         )}
     </div>
-  );
+  )
 }
 export default App;

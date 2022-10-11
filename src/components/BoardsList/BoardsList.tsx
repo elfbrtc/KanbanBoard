@@ -1,15 +1,25 @@
-import React from 'react'
+import React, { FC, useState } from 'react'
 import { Styled } from './BoardsList.styled'
 import './BoardsList.css'
 import BoardCard from '../BoardCard'
 import { useBoardsContext } from '../../contexts/BoardsContext/BoardsContext'
+import { BoardsListProps, BoardsListValuesProps } from './BoardsList.types'
 
-const BoardsList = () => {
+const BoardsList: FC<BoardsListProps>  = (props) => {
+  const [boardValues, setBoardValues] = useState<BoardsListValuesProps>({
+    id:0,
+    title:"Untitled Board",
+  })
 
   const boardsContext= useBoardsContext()
   
+  const handleShowBoard=(singleBoardType:any)=>{
+    console.log(singleBoardType)
+    props.onShowBoardDetail(singleBoardType)
+  }
+  
   const handleAddNewBoard=()=>{ 
-    
+    props.onCreateBoard(boardValues)
   }
 
   return (
@@ -21,7 +31,7 @@ const BoardsList = () => {
         <BoardCard
         icon="analytics" 
         text={board.title}
-        onClick={handleAddNewBoard}></BoardCard>
+        onClick={()=>handleShowBoard(board)}></BoardCard>
       ))} 
       <BoardCard
         icon="add" 

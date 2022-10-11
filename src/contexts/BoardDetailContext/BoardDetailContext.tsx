@@ -8,40 +8,39 @@ import {
     useState,
 } from 'react'
 import { boards } from '../../services/http/scrumboard/endpoints/boards'
-import { BoardsType, ContextType } from './types'
+import { BoardDetailType, ContextType } from './types'
 
-export const initialState: BoardsType = {
+export const initialState: BoardDetailType = {
     boards: [],
 
 }
 
-export const BoardsContext = createContext<ContextType>({
+export const BoardDetailContext = createContext<ContextType>({
     dispatches: {},
     state: initialState,
 })
 
 export const BoardsProvider: FC<PropsWithChildren> = ({ children }) => {
-    const [state, setState] = useState<BoardsType>(initialState)
+    const [state, setState] = useState<BoardDetailType>(initialState)
     const dispatches: ContextType['dispatches'] = {}
     useEffect(() => {
-        
+        console.log("sdfdsfdsf")
         boards.getListBoard().then(({ data }) => {
             setState((prev) => ({ ...prev, boards: data }))
-            console.log(state)
         })
     }, [])
     return (
-        <BoardsContext.Provider
+        <BoardDetailContext.Provider
           value={{
             state,
             dispatches,
           }}
         >
           {children}
-        </BoardsContext.Provider>
+        </BoardDetailContext.Provider>
       )
 }
 
 export const useBoardsContext = ()=>{
-    return useContext(BoardsContext)
+    return useContext(BoardDetailContext)
 }

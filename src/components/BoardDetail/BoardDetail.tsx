@@ -1,13 +1,12 @@
-import { Styled } from './BoardCard.styled'
+import { Styled } from './BoardDetail.styled'
 import React , {FC} from 'react'
-import { BoardCardProps } from './BoardCard.types'
+import { BoardDetailProps } from './BoardDetail.types'
 
-const BoardCard: FC<BoardCardProps> = (props) => {
+const BoardDetail: FC<BoardDetailProps> = (props) => {
   return (
     <Styled>
-      <div className="BoardCard" onClick={props.onClick}>
       {props.icon ? (
-        <div className="icon" >
+        <div className="icon">
           <span className="material-symbols-outlined">{props.icon}</span>
         </div>
       ) : null}
@@ -15,10 +14,9 @@ const BoardCard: FC<BoardCardProps> = (props) => {
         <div className="text">
           <span className="">{props.text}</span>
         </div>
-        </div>
     </Styled>
     
   )
 }
 
-export default BoardCard
+export default BoardDetail

@@ -4,5 +4,5 @@ export type EditableTextInputProps = {
   handleChange?:(e) => void,
   handleBlur?:() => void,
   handleDoubleClick?:() => void
-  handleSubmitBoardTitle?:(e) => void
+  onUpdate?:() => void
   }

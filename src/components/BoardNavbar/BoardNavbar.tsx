@@ -14,6 +14,7 @@ const navigate = useNavigate();
   const boardsContext= useBoardsContext()
 
   const handleUpdateBoardTitle=()=>{
+    console.log("ogn");
     boards.updateBoard(props.board).then((data)=>{
       console.log(data);
     })
@@ -21,7 +22,6 @@ const navigate = useNavigate();
   return (
     <Styled>
       <nav className="bg-white border-gray-200 py-5 px-20 rounded flex justify-between">
-          
             <div className="navbar__left text-black cursor-pointer" onClick={()=>{navigate(-1)}}>
           <div>
           <span className="material-symbols-outlined">analytics</span>
@@ -33,27 +33,23 @@ const navigate = useNavigate();
        
         <div className="navbar__center flex items-center cursor-pointer">
           <EditableTextInput
-            value={fullName}
-            handleChange={(e) => {
+              value={fullName}
+              handleChange={(e) => {
               props.board.title=e.target.value;
-              setFullName(e.target.value)
-              handleUpdateBoardTitle()
+              setFullName(e.target.value)   
           }}
-            handleSubmitBoardTitle={(e) => {
-              props.board.title=e;
-              handleUpdateBoardTitle()
+            onUpdate={()=>{
+              console.log("dsfdsf")
             }}
             handleDoubleClick={() => setShowInputEle(true)}
             handleBlur={() => setShowInputEle(false)}
             showInputEle={showInputEle} />
-
         </div>
         <div className="navbar__right cursor-pointer">
           <span className="material-symbols-outlined text-white">settings</span>
         </div>
       </nav>
     </Styled>
-
   )
 }
 export default BoardNavbar

@@ -5,7 +5,7 @@ import { BoardCardProps } from './BoardCard.types'
 const BoardCard: FC<BoardCardProps> = (props) => {
   return (
     <Styled>
-      <div className="BoardCard" onClick={props.onClick}>
+      <div className="board__card" onClick={props.onClick}>
       {props.icon ? (
         <div className="icon" >
           <span className="material-symbols-outlined">{props.icon}</span>

@@ -1,19 +1,14 @@
 import { Styled } from './BoardDetail.styled'
-import React , {FC} from 'react'
+import React , {FC, useState} from 'react'
 import { BoardDetailProps } from './BoardDetail.types'
+import EditableTextInput from '../EditableTextInput'
+import BoardNavbar from '../BoardNavbar'
 
 const BoardDetail: FC<BoardDetailProps> = (props) => {
+
   return (
     <Styled>
-      {props.icon ? (
-        <div className="icon">
-          <span className="material-symbols-outlined">{props.icon}</span>
-        </div>
-      ) : null}
-      {}
-        <div className="text">
-          <span className="">{props.text}</span>
-        </div>
+       <BoardNavbar/>
     </Styled>
     
   )

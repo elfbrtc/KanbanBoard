@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Styled } from './BoardsList.styled'
 import './BoardsList.css'
 import BoardCard from '../BoardCard'
@@ -6,11 +6,17 @@ import { useBoardsContext } from '../../contexts/BoardsContext/BoardsContext'
 import { BoardsListProps, BoardsListValuesProps } from './BoardsList.types'
 
 const BoardsList: FC<BoardsListProps>  = (props) => {
+  
+  const [refresh, setRefresh] = useState(false);
+
   const [boardValues, setBoardValues] = useState<BoardsListValuesProps>({
     id:0,
     title:"Untitled Board",
   })
 
+  useEffect(() => {
+    if(!refresh) setRefresh(true)
+  }, [refresh])
   const boardsContext= useBoardsContext()
   
   const handleShowBoard=(singleBoardType:any)=>{
@@ -20,6 +26,7 @@ const BoardsList: FC<BoardsListProps>  = (props) => {
   
   const handleAddNewBoard=()=>{ 
     props.onCreateBoard(boardValues)
+    // window.location.reload();
   }
 
   return (
@@ -37,6 +44,7 @@ const BoardsList: FC<BoardsListProps>  = (props) => {
         icon="add" 
         text="Ekle"
         onClick={handleAddNewBoard}></BoardCard>
+        
       </div>
       </div>
     </Styled>  

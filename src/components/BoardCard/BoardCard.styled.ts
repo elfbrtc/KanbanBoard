@@ -27,4 +27,9 @@ cursor:pointer;
     margin: 8px;
     text-align: center;
  }
+ .board__card{
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+ }
 `

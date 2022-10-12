@@ -21,15 +21,25 @@ export const BoardsContext = createContext<ContextType>({
 })
 
 export const BoardsProvider: FC<PropsWithChildren> = ({ children }) => {
+
     const [state, setState] = useState<BoardsType>(initialState)
     const dispatches: ContextType['dispatches'] = {}
     useEffect(() => {
         
         boards.getListBoard().then(({ data }) => {
             setState((prev) => ({ ...prev, boards: data }))
-            console.log(state)
         })
     }, [])
+
+    dispatches.updateBoardTitle = (id:number,title:string)=>{
+      setState(prev=>({
+          ...prev,
+          boards: prev.boards.map(tit=>({
+              ...tit,
+              title : (id===tit.id) ? title : tit.title
+          }))
+      }))
+    }
     return (
         <BoardsContext.Provider
           value={{

@@ -3,12 +3,21 @@ import React, { FC, useState } from 'react'
 import { BoardNavbarProps } from './BoardNavbar.types'
 import EditableTextInput from '../EditableTextInput'
 import { Link, useNavigate } from 'react-router-dom'
+import { useBoardsContext } from '../../contexts/BoardsContext/BoardsContext'
+import { boards } from '../../services/http/scrumboard/endpoints/boards'
 
 const BoardNavbar: FC<BoardNavbarProps> = (props) => {
 const navigate = useNavigate();
 
-  const [fullName, setFullName] = useState("Joe Abraham");
+  const [fullName, setFullName] = useState(props.board.title);
   const [showInputEle, setShowInputEle] = useState(false);
+  const boardsContext= useBoardsContext()
+
+  const handleUpdateBoardTitle=()=>{
+    boards.updateBoard(props.board).then((data)=>{
+      console.log(data);
+    })
+  }
   return (
     <Styled>
       <nav className="bg-white border-gray-200 py-5 px-20 rounded flex justify-between">
@@ -25,7 +34,15 @@ const navigate = useNavigate();
         <div className="navbar__center flex items-center cursor-pointer">
           <EditableTextInput
             value={fullName}
-            handleChange={(e) => setFullName(e.target.value)}
+            handleChange={(e) => {
+              props.board.title=e.target.value;
+              setFullName(e.target.value)
+              handleUpdateBoardTitle()
+          }}
+            handleSubmitBoardTitle={(e) => {
+              props.board.title=e;
+              handleUpdateBoardTitle()
+            }}
             handleDoubleClick={() => setShowInputEle(true)}
             handleBlur={() => setShowInputEle(false)}
             showInputEle={showInputEle} />

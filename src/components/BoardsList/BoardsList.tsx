@@ -20,7 +20,6 @@ const BoardsList: FC<BoardsListProps>  = (props) => {
   const boardsContext= useBoardsContext()
   
   const handleShowBoard=(singleBoardType:any)=>{
-    console.log(singleBoardType)
     props.onShowBoardDetail(singleBoardType)
   }
   
@@ -34,8 +33,9 @@ const BoardsList: FC<BoardsListProps>  = (props) => {
       <Styled>
         <div className="min-h-screen flex items-center justify-center">
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-8 gap-4 p-5'>
-      {boardsContext.state.boards.map((board)=>(
+      {boardsContext.state.boards.map((board,key)=>(
         <BoardCard
+        key={key}
         icon="analytics" 
         text={board.title}
         onClick={()=>handleShowBoard(board)}></BoardCard>

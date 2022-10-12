@@ -24,7 +24,7 @@ export const BoardsProvider: FC<PropsWithChildren> = ({ children }) => {
     const [state, setState] = useState<BoardDetailType>(initialState)
     const dispatches: ContextType['dispatches'] = {}
     useEffect(() => {
-        console.log("sdfdsfdsf")
+
         boards.getListBoard().then(({ data }) => {
             setState((prev) => ({ ...prev, boards: data }))
         })

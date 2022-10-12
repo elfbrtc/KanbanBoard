@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
+import BoardDetail from '../components/BoardDetail'
 import BoardsList from '../components/BoardsList'
 import { BoardsListProps } from '../components/BoardsList/BoardsList.types'
 import { boards } from '../services/http/scrumboard/endpoints/boards'
@@ -11,18 +12,21 @@ const BoardsPage: FC<BoardsPageProps> = (props) => {
   const navigate = useNavigate()
 
   const handleShowBoardDetail: BoardsListProps['onShowBoardDetail'] = (values) => {
-   navigate('/boards-detail')
+    console.log(values)
+   navigate('/boards-detail', {state:{board:values}})
+
   }
 
   const handleCreateBoard:BoardsListProps['onCreateBoard'] = (values) => {
     boards.createBoard(values).then((board) =>{
-      console.log(board);
       navigate('/boards-detail')
 
     })
    }
 
-  return <BoardsList onShowBoardDetail={handleShowBoardDetail} onCreateBoard={handleCreateBoard}  />
+  return <BoardsList onShowBoardDetail={handleShowBoardDetail} onCreateBoard={handleCreateBoard} />
+        
+  
 }
 
 

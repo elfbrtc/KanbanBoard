@@ -53,7 +53,6 @@ export const LoginProvider: FC<PropsWithChildren> = ({ children }) => {
   },[state.token])
 
   const login = (token: string, username: string) => {
-    console.log(token)
     setState({
       
       username,
@@ -89,7 +88,6 @@ export const LoginProvider: FC<PropsWithChildren> = ({ children }) => {
 
 export const useLoginContext = () => {
   const { state, login, logout } = useContext(LoginContext)
-  console.log(state.isLoggedIn)
   return {
     username: state.username,
     isLoggedIn: state.isLoggedIn,

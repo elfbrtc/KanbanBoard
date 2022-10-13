@@ -1,8 +1,8 @@
-import { Styled } from './BoardCard.styled'
+import { Styled } from './BoardDetailListCard.styled'
 import React , {FC} from 'react'
-import { BoardCardProps } from './BoardCard.types'
+import { BoardDetailListCardProps } from './BoardDetailListCard.types'
 
-const BoardCard: FC<BoardCardProps> = (props) => {
+const BoardCard: FC<BoardDetailListCardProps> = (props) => {
   return (
     <Styled>
       <div className="board__card" onClick={props.onClick}>

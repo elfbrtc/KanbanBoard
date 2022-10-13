@@ -1,2 +1,2 @@
-import BoardCard from "./BoardCard";
-export default BoardCard
+import BoardDetailListCard from "./BoardDetailListCard";
+export default BoardDetailListCard

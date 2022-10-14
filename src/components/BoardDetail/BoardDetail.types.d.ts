@@ -1,5 +1,12 @@
 export type BoardDetailProps = {
-    icon?: string
-    text?:string
-    onClick?:() => void
-  }
+  boardListId?: number
+  boardId: number,
+  title?: string
+
+}
+
+export type BoardsDetailValuesProps = {
+  boardListId?: number
+  boardId: number,
+  title?: string
+}

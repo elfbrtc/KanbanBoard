@@ -5,49 +5,51 @@ import BoardCard from '../BoardCard'
 import { useBoardsContext } from '../../contexts/BoardsContext/BoardsContext'
 import { BoardsListProps, BoardsListValuesProps } from './BoardsList.types'
 
-const BoardsList: FC<BoardsListProps>  = (props) => {
-  
+const BoardsList: FC<BoardsListProps> = (props) => {
+
+  const boardsContext = useBoardsContext()
+
   const [refresh, setRefresh] = useState(false);
 
   const [boardValues, setBoardValues] = useState<BoardsListValuesProps>({
-    id:0,
-    title:"Untitled Board",
+    id: 0,
+    title: "Untitled Board",
   })
 
   useEffect(() => {
-    if(!refresh) setRefresh(true)
+    if (!refresh) setRefresh(true)
   }, [refresh])
-  const boardsContext= useBoardsContext()
-  
-  const handleShowBoard=(singleBoardType:any)=>{
+
+
+  const handleShowBoard = (singleBoardType: any) => {
     props.onShowBoardDetail(singleBoardType)
   }
-  
-  const handleAddNewBoard=()=>{ 
+
+  const handleAddNewBoard = () => {
     props.onCreateBoard(boardValues)
     // window.location.reload();
   }
 
   return (
-    
-      <Styled>
-        <div className="min-h-screen flex items-center justify-center">
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-8 gap-4 p-5'>
-      {boardsContext.state.boards.map((board,key)=>(
-        <BoardCard
-        key={key}
-        icon="analytics" 
-        text={board.title}
-        onClick={()=>handleShowBoard(board)}></BoardCard>
-      ))} 
-      <BoardCard
-        icon="add" 
-        text="Ekle"
-        onClick={handleAddNewBoard}></BoardCard>
-        
+
+    <Styled>
+      <div className="min-h-screen flex items-center justify-center ">
+        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-8 gap-4 p-5 elfogn'>
+          {boardsContext.state.boards.map((board, key) => (
+            <BoardCard
+              key={key}
+              icon="analytics"
+              text={board.title}
+              onClick={() => handleShowBoard(board)}></BoardCard>
+          ))}
+          <BoardCard
+            icon="add"
+            text="Ekle"
+            onClick={handleAddNewBoard}></BoardCard>
+
+        </div>
       </div>
-      </div>
-    </Styled>  
+    </Styled>
   )
 }
 export default BoardsList

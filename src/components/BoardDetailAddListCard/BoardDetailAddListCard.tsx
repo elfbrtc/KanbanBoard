@@ -31,10 +31,11 @@ const BoardDetailAddListCard: FC<BoardDetailAddListCardProps> = (props) => {
   return (
     <Styled>
       {!isClicked ? (
-        <div className='flex max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 p-4' onClick={handleAddClick}>
+        <div className='flex max-w-sm bg-white rounded-3xl border border-gray-200 shadow-md hover:bg-gray-100 p-4' onClick={handleAddClick}>
           <span className="material-symbols-outlined rounded-full bg-red-600 text-white w-8 h-8 flex items-center justify-center ">add</span>
           <p className='flex items-center justify-center ml-4 font-semibold '>Add a list</p>
         </div>) : (
+          <div className=' flex flex-col max-w-sm bg-white rounded-3xl border border-gray-200 shadow-md hover:bg-gray-100 '>
         <TextFieldAddCard
           value={value}
           title='List title*'
@@ -44,6 +45,7 @@ const BoardDetailAddListCard: FC<BoardDetailAddListCardProps> = (props) => {
             setValue(e.target.value)
           }}
         />
+        </div>
       )}
     </Styled>
   )

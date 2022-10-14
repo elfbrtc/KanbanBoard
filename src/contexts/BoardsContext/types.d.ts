@@ -1,12 +1,7 @@
 export type BoardsType={
-    boards:Array<{
-        id: number,
-        title: string,
-        createdAt: string,
-        updatedAt: string,
-        ownerId: number,
-        members: Array
-    }>
+    boards:Array<
+        SingleBoardType
+    >
 
 }
 
@@ -21,5 +16,5 @@ export type ContextType = {
     createdAt: string,
     updatedAt: string,
     ownerId: number,
-    members: Array
+    members?: Array
 }

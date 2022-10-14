@@ -7,7 +7,7 @@ import {
   useEffect,
 } from 'react'
 import instance from '../../services/http/scrumboard/instance'
-import { ContextType, StateType } from './types'
+import { ContextType, StateType } from './types';
 
 const initialState: StateType = {
   isLoggedIn: Boolean(localStorage.getItem('token')),
@@ -23,9 +23,8 @@ export const LoginContext = createContext<ContextType>({
 
 export const LoginProvider: FC<PropsWithChildren> = ({ children }) => {
   const [state, setState] = useState<StateType>(initialState)
-
   useEffect(() => {
-    instance.interceptors.request.use((config) => {
+    /*instance.interceptors.request.use((config) => {
       const _config = { ...config }
       _config.headers = {
         ...config.headers,
@@ -33,23 +32,23 @@ export const LoginProvider: FC<PropsWithChildren> = ({ children }) => {
       }
       _config.headers.Authorization = 'Bearer ' + state.token
       return _config
-    })
+    })*/
 
-    /* instance.interceptors.response.use(
+    instance.interceptors.response.use(
       (response) => {
-        return response
+        const _config = { ...response}
+        _config.headers = {
+          ...response.headers,
+        }
+        _config.headers.Authorization = 'Bearer ' + state.token
+        return _config
       },
       (error) => {
         if ([500, 401, 403].includes(error.response.status)) {
-          setState((prev) => ({
-            ...prev,
-            isLoggedIn: false,
-            token: '',
-            username: '',
-          }))
+          logout()
         }
       }
-    ) */
+    )
   },[state.token])
 
   const login = (token: string, username: string) => {

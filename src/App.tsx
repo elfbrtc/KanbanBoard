@@ -7,6 +7,8 @@ import { useLoginContext } from './contexts/LoginContext/LoginContext'
 import BoardsPage from './pages/BoardsPage'
 import { BoardsProvider } from './contexts/BoardsContext/BoardsContext'
 import BoardDetail from './components/BoardDetail'
+import BoardDetailPage from './pages/BoardDetailPage'
+import { BoardDetailProvider } from './contexts/BoardDetailContext/BoardDetailContext'
 
 function App() {
   const { isLoggedIn } = useLoginContext()
@@ -29,9 +31,12 @@ function App() {
               <Route path="/boards-page" element={<BoardsPage />} />
           </Routes>
           </BoardsProvider>
-          <Routes>
-              <Route path="/boards-detail" element={<BoardDetail />} />
-          </Routes>
+          <BoardDetailProvider>
+            <Routes>
+                <Route path="/boards-detail" element={<BoardDetailPage />} />
+            </Routes>
+          </BoardDetailProvider>
+          
         </BrowserRouter>
       )}
     </div>

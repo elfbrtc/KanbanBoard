@@ -9,6 +9,7 @@ import {
 } from 'react'
 import { boards } from '../../services/http/scrumboard/endpoints/boards'
 import { BoardsType, ContextType } from './types'
+import instance from '../../services/http/scrumboard/instance'
 
 export const initialState: BoardsType = {
     boards: [],
@@ -25,7 +26,6 @@ export const BoardsProvider: FC<PropsWithChildren> = ({ children }) => {
     const [state, setState] = useState<BoardsType>(initialState)
     const dispatches: ContextType['dispatches'] = {}
     useEffect(() => {
-        
         boards.getListBoard().then(({ data }) => {
             setState((prev) => ({ ...prev, boards: data }))
         })

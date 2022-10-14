@@ -1,12 +1,7 @@
+import { SingleBoardType } from "../BoardsContext/types"
+
 export type BoardDetailType={
-    boards:Array<{
-        id: number,
-        title: string,
-        createdAt: string,
-        updatedAt: string,
-        ownerId: number,
-        members: Array
-    }>
+    singleList:Array<SingleBoardDetailList>
 
 }
 
@@ -14,3 +9,14 @@ export type ContextType = {
     state: BoardsType
     dispatches :  any
   }
+
+export type SingleBoardDetailList = {
+    id: number,
+    order: any,
+    title: string
+    createdAt: string,
+    updatedAt: string,
+    boardId: number,
+    cards: Array,
+    board: Array<SingleBoardType>
+}

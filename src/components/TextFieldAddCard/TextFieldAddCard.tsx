@@ -10,7 +10,6 @@ const TextFieldAddCard: FC<TextFieldAddCardProps> = (props) => {
 
   return (
     <Styled>
-      <div className=' flex flex-col max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 '>
         <TextField id="outlined-basic" label={`${props.title}`} variant="outlined"
           onChange={
            props.handleChange
@@ -34,7 +33,6 @@ const TextFieldAddCard: FC<TextFieldAddCardProps> = (props) => {
         <button className="bg-gray-500 hover:bg-blue-700 text-white font-bold rounded-full mb-4 ml-4 w-16 py-2 px-4" onClick={props.onClick}>
           Add
         </button>
-      </div>
     </Styled>
     
   )

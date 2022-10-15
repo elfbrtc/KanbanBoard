@@ -5,7 +5,9 @@ export const updateBoardList = (payload: BoardsRequestPayload) =>
   service.put('list/'+payload.boardListId, payload)
 
   export const createBoardList = (payload: BoardsRequestPayload) =>
-  service.post('list', payload)
+  service.post('list', payload, {
+    headers:{"Authorization": "Bearer " + localStorage.getItem("token")}
+  })
 
   export const deleteBoardList = (payload: BoardsRequestPayload) =>
   service.delete('list'+payload.boardListId)

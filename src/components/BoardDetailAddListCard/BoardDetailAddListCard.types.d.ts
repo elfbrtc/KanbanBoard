@@ -1,5 +1,6 @@
 export type BoardDetailAddListCardProps = {
     icon?: string
     text?:string
-    onClick?:() => void
+    onClick?:() => void,
+    boardId: number
   }

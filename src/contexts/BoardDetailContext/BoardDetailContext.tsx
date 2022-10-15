@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react'
 import { boardDetail } from '../../services/http/scrumboard/endpoints/boardDetail'
-import { BoardDetailType, ContextType } from './types'
+import { BoardDetailType, ContextType, CreateBoardListType } from './types'
 
 export const initialState: BoardDetailType = {
   singleList: [],
@@ -27,6 +27,10 @@ export const BoardDetailProvider: FC<PropsWithChildren> = ({ children }) => {
   }, [])
 
   dispatches.getBoardList = (boardList: any) => {
+    setState((prev) => ({ ...prev, singleList: boardList }))
+  }
+
+  dispatches.createBoardList = (boardList: any) => {
     setState((prev) => ({ ...prev, singleList: boardList }))
   }
 

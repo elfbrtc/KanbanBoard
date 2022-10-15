@@ -21,7 +21,7 @@ const navigate = useNavigate();
   }
   return (
     <Styled>
-      <nav className="bg-white border-gray-200 py-5 px-20 rounded flex justify-between">
+      <nav className="bg-white border-gray-200 py-5 px-20 rounded flex justify-between relative inset-0 w-screen md:fixed md:w-12/12">
             <div className="navbar__left text-black cursor-pointer" onClick={()=>{navigate(-1)}}>
           <div>
           <span className="material-symbols-outlined">analytics</span>

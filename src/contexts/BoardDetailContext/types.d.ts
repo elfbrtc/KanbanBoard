@@ -2,7 +2,11 @@ import { SingleBoardType } from "../BoardsContext/types"
 
 export type BoardDetailType={
     singleList:Array<SingleBoardDetailList>
+}
 
+export type CreateBoardListType = {
+    boardId: number,
+    title: string
 }
 
 export type ContextType = {
@@ -12,11 +16,11 @@ export type ContextType = {
 
 export type SingleBoardDetailList = {
     id: number,
-    order: any,
+    order?: any,
     title: string
     createdAt: string,
     updatedAt: string,
     boardId: number,
-    cards: Array,
-    board: Array<SingleBoardType>
+    cards?: Array,
+    board?: Array<SingleBoardType>
 }

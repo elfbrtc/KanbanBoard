@@ -2,7 +2,7 @@ import { SingleBoardType } from "../../../../../contexts/BoardsContext/types"
 
 export type BoardsRequestPayload = {
     boardListId?: number
-    boardId:number,
+    boardId?:number,
     title:string
 }
 

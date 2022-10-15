@@ -33,9 +33,11 @@ export const LoginProvider: FC<PropsWithChildren> = ({ children }) => {
       _config.headers.Authorization = 'Bearer ' + state.token
       return _config
     })*/
+    console.log("Login Context")
 
     instance.interceptors.response.use(
-      (response) => {
+      (response) => {        
+        console.log("Response")      
         const _config = { ...response}
         _config.headers = {
           ...response.headers,
@@ -44,6 +46,7 @@ export const LoginProvider: FC<PropsWithChildren> = ({ children }) => {
         return _config
       },
       (error) => {
+        console.log("Error")      
         if ([500, 401, 403].includes(error.response.status)) {
           logout()
         }

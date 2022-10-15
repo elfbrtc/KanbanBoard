@@ -1,4 +1,3 @@
-import { Styled } from './BoardDetail.styled'
 import React, { FC, useState, useRef } from 'react'
 import { BoardDetailProps, BoardsDetailValuesProps } from './BoardDetail.types'
 import EditableTextInput from '../EditableTextInput'
@@ -21,23 +20,25 @@ const BoardDetail: FC<BoardDetailProps> = (props) => {
     boardDetailContext.dispatches.getBoardList(board)
   }
 
-  useRef(() => {
-    console.log("df")
+  useEffect(() => {
     boardDetail.getBoardList(board.boardId).then(({ data }) => {
       handleGetBoardDetailList(data)
     })
-  })
+  }, [])
 
   return (
-    <Styled>
+    <>
       <BoardNavbar board={location.state.board} />
-      {boardDetailContext.state.singleList.map((list: any) => (
-        <BoardDetailListCard />
-      ))}
-      <BoardDetailAddListCard />
-    </Styled>
-
+      <div className="flex w-max py-32 px-16">
+        {boardDetailContext.state.singleList.map((list: any, key: any) => (
+          <BoardDetailListCard key={key} title={list.title}/>
+        ))}
+        <BoardDetailAddListCard boardId={props.boardId} />
+      </div>
+      
+    </>
   )
+
 }
 
 export default BoardDetail

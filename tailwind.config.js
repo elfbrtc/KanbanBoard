@@ -10,6 +10,7 @@ module.exports = {
       },
       colors: {
         'regal-pink': '#243c5a',
+        'nav-bar-color': '#282c3c',
       },
     },
   },

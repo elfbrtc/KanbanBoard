@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC} from 'react'
 import { useNavigate } from 'react-router-dom'
 import BoardDetail from '../components/BoardDetail'
 import BoardsList from '../components/BoardsList'
@@ -18,7 +18,6 @@ const BoardsPage: FC<BoardsPageProps> = (props) => {
 
   const handleCreateBoard:BoardsListProps['onCreateBoard'] = (values) => {
     boards.createBoard(values).then((created) =>{
-      console.log(created)
       navigate('/boards-detail', {state:{board: created.data}})
     })
    }

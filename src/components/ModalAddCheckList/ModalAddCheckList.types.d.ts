@@ -1,4 +1,4 @@
-export type ModalProps = {
+export type ModalAddCheckListProps = {
     onShow?: boolean
     onClose?:() => void
   }

@@ -9,9 +9,12 @@ import { useBoardDetailContext } from '../../contexts/BoardDetailContext/BoardDe
 import { useEffect } from 'react'
 import { boardDetail } from '../../services/http/scrumboard/endpoints/boardDetail'
 import BoardDetailModalCard from '../BoardDetailModalCard'
+import { useBoardsContext } from '../../contexts/BoardsContext/BoardsContext'
 
 const BoardDetail: FC<BoardDetailProps> = (props) => {
+  
   const boardDetailContext = useBoardDetailContext()
+  const boardContext = useBoardsContext()
   const location = useLocation();
   const [board, setBoard] = useState<BoardsDetailValuesProps>({
     boardId: props.boardId,
@@ -32,7 +35,7 @@ const BoardDetail: FC<BoardDetailProps> = (props) => {
       <BoardNavbar board={location.state.board} />
       <div className="flex w-max py-32  px-16">
         {boardDetailContext.state.singleList.map((list: any, key: any) => (
-          <BoardDetailListCard key={key} title={list.title}/>
+          <BoardDetailListCard key={key} title={list.title} listId={list.id}/>
         ))}
         <BoardDetailAddListCard boardId={props.boardId} />
       </div>

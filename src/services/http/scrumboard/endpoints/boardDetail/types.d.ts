@@ -2,12 +2,27 @@ import { SingleBoardType } from "../../../../../contexts/BoardsContext/types"
 
 export type BoardsRequestPayload = {
     boardListId?: number
-    boardId?:number,
-    title:string
+    boardId?: number,
+    title?: string
+}
+
+export type ListCardRequestPayload = {
+    listId?: number,
+    title: string
+}
+
+export type ListCardReponseType = {
+    data: {
+        id: number,
+        title: string,
+        listId: number,
+        updatedAt: string,
+        createdAt: string
+    }
 }
 
 export type BoardsDetailCreateListResponseType = {
-    data : {
+    data: {
         id: number,
         title: string
         createdAt: string,
@@ -17,7 +32,7 @@ export type BoardsDetailCreateListResponseType = {
 }
 
 export type BoardsDetailGetListResponseType = {
-    data : Array<{
+    data: Array<{
         id: number,
         order: any,
         title: string

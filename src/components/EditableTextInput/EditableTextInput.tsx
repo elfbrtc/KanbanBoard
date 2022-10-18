@@ -11,11 +11,10 @@ const EditableTextInput: FC<EditableTextInputProps> = (props) => {
           <input type="text" id="first_name" className=" outline-0 text-center font-semibold bg-gray-50 border-gray-300" placeholder="John" required
             value={props.value}
             onChange={props.handleChange}
-            onBlur={props.handleBlur}
             autoFocus
           />
           <div onClick={() => {
-            console.log("asdasd")
+            props.onUpdate?.()
           }}>
             <span className="material-symbols-outlined" >
               done

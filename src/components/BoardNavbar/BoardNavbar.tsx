@@ -1,5 +1,5 @@
 import { Styled } from './BoardNavbar.styled'
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect} from 'react'
 import { BoardNavbarProps } from './BoardNavbar.types'
 import EditableTextInput from '../EditableTextInput'
 import { Link, useNavigate } from 'react-router-dom'
@@ -10,14 +10,20 @@ const BoardNavbar: FC<BoardNavbarProps> = (props) => {
 const navigate = useNavigate();
 
   const [fullName, setFullName] = useState(props.board.title);
+  const [board, setBoard] = useState(null);
   const [showInputEle, setShowInputEle] = useState(false);
   const boardsContext= useBoardsContext()
 
+  useEffect(() => {
+    
+  }, [])
+
   const handleUpdateBoardTitle=()=>{
-    console.log("ogn");
+    props.board.title = fullName
     boards.updateBoard(props.board).then((data)=>{
-      console.log(data);
+      boardsContext.dispatches.updateBoardTitle(props.board.id, props.board.title)
     })
+    setShowInputEle(false)
   }
   return (
     <Styled>
@@ -35,12 +41,11 @@ const navigate = useNavigate();
           <EditableTextInput
               value={fullName}
               handleChange={(e) => {
-              props.board.title=e.target.value;
-              setFullName(e.target.value)   
+                setFullName(e.target.value)
+               /* props.board.title=e.target.value;
+              setFullName(e.target.value)   */
           }}
-            onUpdate={()=>{
-              console.log("dsfdsf")
-            }}
+            onUpdate={handleUpdateBoardTitle}
             handleDoubleClick={() => setShowInputEle(true)}
             handleBlur={() => setShowInputEle(false)}
             showInputEle={showInputEle} />

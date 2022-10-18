@@ -24,20 +24,10 @@ export const LoginContext = createContext<ContextType>({
 export const LoginProvider: FC<PropsWithChildren> = ({ children }) => {
   const [state, setState] = useState<StateType>(initialState)
   useEffect(() => {
-    /*instance.interceptors.request.use((config) => {
-      const _config = { ...config }
-      _config.headers = {
-        ...config.headers,
-        
-      }
-      _config.headers.Authorization = 'Bearer ' + state.token
-      return _config
-    })*/
     console.log("Login Context")
-
+    console.log(state.token)
     instance.interceptors.response.use(
-      (response) => {        
-        console.log("Response")      
+      (response) => {                
         const _config = { ...response}
         _config.headers = {
           ...response.headers,
@@ -49,30 +39,32 @@ export const LoginProvider: FC<PropsWithChildren> = ({ children }) => {
         console.log("Error")      
         if ([500, 401, 403].includes(error.response.status)) {
           logout()
+          //Değiştirilebilir
+          window.location.href = '/login'
         }
+        return Promise.reject(error);
       }
     )
   },[state.token])
 
   const login = (token: string, username: string) => {
+    localStorage.setItem('token', token)
+    localStorage.setItem('username', username)
     setState({
-      
       username,
       token,
       isLoggedIn: true,
     })
-
-    localStorage.setItem('token', token)
-    localStorage.setItem('username', username)
   }
   const logout = () => {
+    
+    localStorage.removeItem('token')
+    localStorage.removeItem('username')
     setState({
       username: '',
       token: '',
       isLoggedIn: false,
     })
-    localStorage.setItem('token', '')
-    localStorage.setItem('username', '')
   }
 
   return (

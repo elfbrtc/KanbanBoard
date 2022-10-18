@@ -1,4 +1,4 @@
-export type ModalProps = {
+export type ModalTextFieldProps = {
     onShow?: boolean
     onClose?:() => void
   }

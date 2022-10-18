@@ -33,6 +33,15 @@ export const BoardDetailProvider: FC<PropsWithChildren> = ({ children }) => {
   dispatches.createBoardList = (boardList: any) => {
     setState((prev) => ({ ...prev, singleList: boardList }))
   }
+  
+  dispatches.createListCard = (listId: any, listCard: any) => {
+    let allListData = state.singleList
+    let dataIndex = allListData.findIndex((item) => 
+        item.id === listId
+    )
+    allListData[dataIndex] = listCard
+    setState((prev) => ({ ...prev, singleList: allListData }))
+  }
 
   return (
     <BoardDetailContext.Provider

@@ -9,9 +9,9 @@ import { BoardsProvider } from './contexts/BoardsContext/BoardsContext'
 import BoardDetail from './components/BoardDetail'
 import BoardDetailPage from './pages/BoardDetailPage'
 import { BoardDetailProvider } from './contexts/BoardDetailContext/BoardDetailContext'
-
+import instance from './services/http/scrumboard/instance'
 function App() {
-  const { isLoggedIn } = useLoginContext()
+  const { isLoggedIn, logout } = useLoginContext()
 
   return (
     <div className="App">
@@ -25,17 +25,19 @@ function App() {
         </BrowserRouter>
       ) : (
         <BrowserRouter>
+       
           <BoardsProvider>
             <Routes>
               <Route path="/" element={<Navigate to="/boards-page" />} />
               <Route path="/boards-page" element={<BoardsPage />} />
-          </Routes>
-          </BoardsProvider>
+            </Routes>
           <BoardDetailProvider>
             <Routes>
                 <Route path="/boards-detail" element={<BoardDetailPage />} />
             </Routes>
           </BoardDetailProvider>
+          </BoardsProvider>
+         
           
         </BrowserRouter>
       )}

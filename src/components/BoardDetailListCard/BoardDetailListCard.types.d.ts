@@ -1,4 +1,4 @@
 export type BoardDetailListCardProps = {
-    title: string
-    
-  }
+    listId: number
+    title: string    
+}

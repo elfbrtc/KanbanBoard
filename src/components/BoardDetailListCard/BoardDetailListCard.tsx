@@ -4,10 +4,14 @@ import BoardCard from '../BoardCard'
 import TextFieldAddCard from '../TextFieldAddCard'
 import BoardDetailModalCard from '../BoardDetailModalCard'
 import Modal from '../Modal'
+import { boardDetail } from '../../services/http/scrumboard/endpoints/boardDetail'
+import { useBoardDetailContext } from '../../contexts/BoardDetailContext/BoardDetailContext'
 
 const BoardDetailListCard: FC<BoardDetailListCardProps> = (props) => {
   const [isClicked, setIsClicked] = useState(false)
   const [value, setValue] = useState("");
+  const [showModal, setShowModal] = useState(false)
+  const boardDetailContext = useBoardDetailContext()
   const handleSetClicked = () => {
     setIsClicked(!isClicked)
   }
@@ -22,7 +26,21 @@ const BoardDetailListCard: FC<BoardDetailListCardProps> = (props) => {
   };
 
   const handleAddCard = () => {
+    boardDetail.createListCard({listId: props.listId, title: value}).then((data: any) => {
+      boardDetail.getByIdBoardList({boardListId: props.listId}).then((getList : any) => {
+        boardDetailContext.dispatches.createListCard(props.listId, getList.data)
+      })
+    })
+    setValue("")
+    handleSetClicked()
+  }
 
+  const handleCloseModal = () => {
+      setShowModal(false)
+  }
+
+  const handleCardClick = () => {
+    setShowModal(true)
   }
 
   return (
@@ -32,8 +50,18 @@ const BoardDetailListCard: FC<BoardDetailListCardProps> = (props) => {
         <span className="material-symbols-outlined">more_vert</span>
 
       </div>
-      <div>
-        <Modal/>
+      <div>{
+        boardDetailContext.state.singleList.filter((list: any) => list.id === props.listId).map((singleList: any) => 
+           singleList.cards.map((card: any, key: any) => (
+            <BoardDetailModalCard key = {key} title = {card.title} onCardClick={handleCardClick}/>
+           ))
+        )}
+        
+        {
+          showModal ? (
+            <Modal onClose={handleCloseModal}/>
+          ) : null
+        }
       </div>
 
       <hr className='border-t-1 border-gray-300 w-full'></hr>

@@ -26,8 +26,13 @@ export const getBoardList = (boardId: number) =>
     headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
   })
 
-export const createListCard = (payload: ListCardRequestPayload) => 
+export const createListCard = (payload: ListCardRequestPayload) =>
   service.post('card', payload, {
+    headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
+  })
+
+export const getLabelList = () =>
+  service.get('label', {
     headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
   })
 

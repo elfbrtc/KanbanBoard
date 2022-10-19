@@ -12,6 +12,7 @@ import { BoardDetailType, ContextType, CreateBoardListType } from './types'
 
 export const initialState: BoardDetailType = {
   singleList: [],
+  labels : []
 }
 
 export const BoardDetailContext = createContext<ContextType>({
@@ -23,7 +24,9 @@ export const BoardDetailProvider: FC<PropsWithChildren> = ({ children }) => {
   const [state, setState] = useState<BoardDetailType>(initialState)
   const dispatches: ContextType['dispatches'] = {}
   useEffect(() => {
-    
+    boardDetail.getLabelList().then((data: any) => {
+      setState((prev) => ({...prev, labels: data.data}))
+    })
   }, [])
 
   dispatches.getBoardList = (boardList: any) => {

@@ -11,6 +11,32 @@ export type ListCardRequestPayload = {
     title: string
 }
 
+export type CardLabelRequestPayload = {
+    cardId : number,
+    labelId: number
+}
+
+export type CardChecklistRequestPayload = {
+    cardId : number,
+    title: string
+}
+
+export type CardChecklistUpdateRequestPayload = {
+    checklistId : number,
+    title: string
+}
+
+export type CardChecklistItemRequestPayload = {
+    checklistId : number,
+    title: string,
+    isChecked: boolean
+}
+
+export type CardChecklistItemUpdateRequestPayload = {
+    checklistItemId: number,
+    isChecked: boolean
+}
+
 export type ListCardReponseType = {
     data: {
         id: number,

@@ -1,5 +1,5 @@
 import service from '../../instance'
-import { BoardsRequestPayload, ListCardRequestPayload } from './types'
+import { BoardsRequestPayload, CardChecklistItemRequestPayload, CardChecklistItemUpdateRequestPayload, CardChecklistRequestPayload, CardChecklistUpdateRequestPayload, CardLabelRequestPayload, ListCardRequestPayload } from './types'
 
 export const updateBoardList = (payload: BoardsRequestPayload) =>
   service.put('list/' + payload.boardListId, payload, {
@@ -31,10 +31,66 @@ export const createListCard = (payload: ListCardRequestPayload) =>
     headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
   })
 
+export const getCardById = (cardId: number) => 
+  service.get('card/' + cardId, {
+    headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
+  })
+
+
 export const getLabelList = () =>
   service.get('label', {
     headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
   })
+
+export const createCardLabel = (payload: CardLabelRequestPayload) => 
+  service.post('card-label', payload, {
+    headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
+  })
+
+
+export const removeCardLabel = (cardLabelId: number) => 
+  service.delete('card-label/'+cardLabelId, {
+    headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
+  })
+
+
+export const createCardCheckList = (payload: CardChecklistRequestPayload) => 
+  service.post('checklist', payload, {
+    headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
+  })
+
+
+export const removeCardChecklist = (checklistId: number) => 
+  service.delete('checklist/'+checklistId, {
+    headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
+  })
+
+
+export const updateCardChecklist = (payload: CardChecklistUpdateRequestPayload) => 
+  service.put('checklist/'+payload.checklistId, payload, {
+    headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
+  })
+
+
+export const createCardCheckListItem = (payload: CardChecklistItemRequestPayload) => 
+  service.post('checklist-item', payload, {
+    headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
+  })
+
+
+export const removeCardChecklistItem = (checklistItemId: number) => 
+  service.delete('checklist-item/'+checklistItemId, {
+    headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
+  })
+
+
+export const updateCardChecklistItem = (payload: CardChecklistItemUpdateRequestPayload) => 
+  service.put('checklist-item/'+payload.checklistItemId, payload, {
+    headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
+  })
+
+
+
 
 
 

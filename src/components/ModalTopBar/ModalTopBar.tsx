@@ -1,19 +1,22 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
-import { ModalTopBarProps } from './ModalTopBar.types'
+import { ModalCardType, ModalTopBarProps } from './ModalTopBar.types'
 import TextFieldAddCard from '../TextFieldAddCard';
 import ModalPopover from '../ModalPopover';
 import ModalLabelCheckbox from '../ModalLabelCheckbox';
 import { useBoardDetailContext } from '../../contexts/BoardDetailContext/BoardDetailContext';
+import { boardDetail } from '../../services/http/scrumboard/endpoints/boardDetail';
 
 const ModalTopBar: FC<ModalTopBarProps> = (props) => {
 
   const boardDetailContext = useBoardDetailContext();
 
+  const [card, setCard] = useState<ModalCardType>(props.card)
+
   //Checklist
   const [isClicked, setIsClicked] = useState(false)
-  const [value, setValue] = useState("");
+  const [checklistValue, setChecklistValue] = useState("");
   //Checklist Popover
   const [checkListanchorEl, setCheckListAnchorEl] = useState<HTMLButtonElement | null>(null);
   const handleCheckListClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -41,8 +44,8 @@ const ModalTopBar: FC<ModalTopBarProps> = (props) => {
   }
 
   const handleClearClick = () => {
-    if (value) {
-      setValue("");
+    if (checklistValue) {
+      setChecklistValue("");
     }
     else {
       setIsClicked(false);
@@ -50,10 +53,21 @@ const ModalTopBar: FC<ModalTopBarProps> = (props) => {
     }
   };
 
-  const handleAddCard = () => {
-    setValue("")
+  const handleAddChecklist = () => {
+    console.log(card.id)
+    boardDetail.createCardCheckList({cardId : card.id, title: checklistValue}).then((data: any) => {
+      boardDetail.getByIdBoardList({boardListId: card.listId}).then((data: any) => {
+        boardDetailContext.dispatches.updateBoardList(data.data)
+      })
+    })
+    setChecklistValue("")
     handleSetClicked()
+    handleCheckListClose()
   }
+
+  useEffect(() => {
+    
+  }, [])
 
   return (
     <div className="flex justify-between items-center p-4 bg-nav-bar-color border-gray-20 rounded relative inset-0 w-auto">
@@ -89,12 +103,12 @@ const ModalTopBar: FC<ModalTopBarProps> = (props) => {
             child={
               <TextFieldAddCard
                 title={"Checklist title*"}
-                value={value}
+                value={checklistValue}
                 handleChange={(e) => {
-                  setValue(e.target.value)
+                  setChecklistValue(e.target.value)
                 }}
                 onClear={handleClearClick}
-                onClick={handleAddCard} />
+                onClick={handleAddChecklist} />
             } />
         </div>
         <span className="material-symbols-outlined text-white font-medium cursor-pointer">more_horiz</span>

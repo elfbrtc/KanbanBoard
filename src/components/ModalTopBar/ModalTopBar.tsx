@@ -37,7 +37,7 @@ const ModalTopBar: FC<ModalTopBarProps> = (props) => {
     setLabelListAnchorEl(null);
   };
   const labelListOpen = Boolean(labelListanchorEl);
-  const labelListId = checkListOpen ? 'simple-popover' : undefined;
+  const labelListId = labelListOpen ? 'simple-popover' : undefined;
 
   const handleSetClicked = () => {
     setIsClicked(!isClicked)

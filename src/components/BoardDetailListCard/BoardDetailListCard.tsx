@@ -13,6 +13,15 @@ const BoardDetailListCard: FC<BoardDetailListCardProps> = (props) => {
   const [showModal, setShowModal] = useState(false)
   const [selectedCardId, setSelectedCardId] = useState(0)
   const boardDetailContext = useBoardDetailContext()
+
+  const handleUpdateModal = () => {
+    
+    setShowModal(false)
+    setTimeout(function() {
+      setShowModal(true)
+    }, 1);
+    
+  }
   const handleSetClicked = () => {
     setIsClicked(!isClicked)
   }
@@ -64,7 +73,7 @@ const BoardDetailListCard: FC<BoardDetailListCardProps> = (props) => {
         
         {
           showModal ? (
-            <Modal cardId={selectedCardId} onClose={handleCloseModal}/>
+            <Modal onUpdate = {handleUpdateModal} cardId={selectedCardId} onClose={handleCloseModal}/>
           ) : null
         }
       </div>

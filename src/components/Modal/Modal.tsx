@@ -16,9 +16,12 @@ const Modal: FC<ModalProps> = (props) => {
   const [card, setCard] = useState<ModalCardType>()
   const [isLoading, setIsLoading] = useState(true)
 
+  const [ lastUpdate, setLastUpdate ] = useState(0);
+
   const boardDetailContext = useBoardDetailContext()
 
   useEffect(() => {
+    console.log("Geldi")
     const getCardById = async () => {
       setIsLoading(true)
       await boardDetail.getCardById(props.cardId).then((data: any) => {
@@ -47,8 +50,11 @@ const Modal: FC<ModalProps> = (props) => {
   }
 
   const handleAddChecklistItem = () => {
-    console.log("XD")
-    setIsLoading(false)
+    const list = boardDetailContext.state.singleList.find((list: any) => list.cards.find((cList: any) => cList.id === card!!.id))
+    const newCard = list?.cards.find((cList: any) => cList.id === card!!.id)
+    setCard({...newCard})
+    setLastUpdate(Date.now());
+    props.onUpdate?.()
   }
 
   return (
@@ -65,6 +71,7 @@ const Modal: FC<ModalProps> = (props) => {
                 <ModalTextField />
                 <ModalDescriptionTextField />
                 {
+                  boardDetailContext.state.singleList &&
                   boardDetailContext.state.singleList.filter((list: any) => list.id === card!!.listId).map((singleList: any) =>
                     singleList.cards.filter((_card: any) => _card.id === card!!.id).map((singleCard: any) => (
                       singleCard.checklists.map((checklist: any, key: any) => (

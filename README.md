@@ -1,5 +1,14 @@
 # Kanban Board
 
+### Kanban Board Detail View
+![KanbanboardDetay](https://github.com/elfbrtc/KanbanBoard-AkBankPatikaBootcamp-BitirmeProjesi/blob/main/src/assets/BoardDetail2.PNG)
+
+### Kanban Board Card Modal View (1)
+![KanbanboardDetay](https://github.com/elfbrtc/KanbanBoard-AkBankPatikaBootcamp-BitirmeProjesi/blob/main/src/assets/Modall2.PNG)
+
+### Kanban Board Card Modal View (2)
+![KanbanboardDetay](https://github.com/elfbrtc/KanbanBoard-AkBankPatikaBootcamp-BitirmeProjesi/blob/main/src/assets/Modall1.PNG)
+
 ## Features
 
 * Login/Registration operations can be performed

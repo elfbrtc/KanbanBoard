@@ -18,7 +18,7 @@ export const Styled = styled.div`
         display: flex;
         justify-content: space-between;
         margin-bottom: 20px;
-        width: 67%;
+        width: 100%;
     }
     .register-links {
         text-align: center;

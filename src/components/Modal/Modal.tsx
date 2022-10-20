@@ -70,7 +70,7 @@ const Modal: FC<ModalProps> = (props) => {
             <div className="relative w-auto m-6 mx-auto max-w-3xl h-full items-center justify-center">
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 <div className=''>
-                  <ModalTopBar card={card} onCloseClick={handleOnCloseClick} onDueDateClick={handleOnDueDateClick} onCheckListClick={handleOnCheckListClick} onLabelClick={handleOnLabelClick} /></div>
+                  <ModalTopBar onChangeItem = {handleAddNewItem} card={card} onCloseClick={handleOnCloseClick} onDueDateClick={handleOnDueDateClick} onCheckListClick={handleOnCheckListClick} onLabelClick={handleOnLabelClick} /></div>
                 <ModalTextField value = {card!!.title} />
                 <ModalDescriptionTextField />
                 {
@@ -84,7 +84,7 @@ const Modal: FC<ModalProps> = (props) => {
                   )
                 }
                 {
-                  card?.labels && card?.labels.length > 0 ? (<ModalLabelChip/>) : null
+                  card?.labels && card?.labels.length > 0 ? (<ModalLabelChip onRemoveItem = {handleAddNewItem} card = {card} />) : null
                 }               
                 <ModalComment card = {card} onAddComment={handleAddNewItem}/>
                 {

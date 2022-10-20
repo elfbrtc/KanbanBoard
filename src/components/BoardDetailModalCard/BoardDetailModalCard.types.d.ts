@@ -1,5 +1,5 @@
 export type BoardDetailModalCardProps = {
     icon?: string
-    title?:string
+    card:any
     onCardClick?:() => void
   }

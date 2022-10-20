@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import BoardDetail from '../components/BoardDetail'
 import BoardsList from '../components/BoardsList'
@@ -10,10 +10,18 @@ export type BoardsDetailPageProps = {}
 
 const BoardsDetailPage: FC<BoardsDetailPageProps> = (props) => {
     const location = useLocation();
+    const [ lastUpdate, setLastUpdate ] = useState(0);
     useEffect(() => {
 
     })
-    return <BoardDetail boardId={location.state.board.id} />
+
+    const handleUpdateState = () => {
+        setLastUpdate(Date.now());
+        console.log("Geldiiii")
+        console.log(location.state.board)
+    }
+
+    return <BoardDetail onUpdate = {handleUpdateState} boardId={location.state.board.id} />
 
 
 }

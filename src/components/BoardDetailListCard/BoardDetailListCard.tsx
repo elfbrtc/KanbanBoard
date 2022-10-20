@@ -6,6 +6,7 @@ import BoardDetailModalCard from '../BoardDetailModalCard'
 import Modal from '../Modal'
 import { boardDetail } from '../../services/http/scrumboard/endpoints/boardDetail'
 import { useBoardDetailContext } from '../../contexts/BoardDetailContext/BoardDetailContext'
+import { render } from '@testing-library/react'
 
 const BoardDetailListCard: FC<BoardDetailListCardProps> = (props) => {
   const [isClicked, setIsClicked] = useState(false)
@@ -15,12 +16,13 @@ const BoardDetailListCard: FC<BoardDetailListCardProps> = (props) => {
   const boardDetailContext = useBoardDetailContext()
 
   const handleUpdateModal = () => {
-    
+
     setShowModal(false)
-    setTimeout(function() {
+    setTimeout(function () {
       setShowModal(true)
     });
-    
+    props.onUpdate?.()
+
   }
   const handleSetClicked = () => {
     setIsClicked(!isClicked)
@@ -36,8 +38,8 @@ const BoardDetailListCard: FC<BoardDetailListCardProps> = (props) => {
   };
 
   const handleAddCard = () => {
-    boardDetail.createListCard({listId: props.listId, title: value}).then((data: any) => {
-      boardDetail.getByIdBoardList({boardListId: props.listId}).then((getList : any) => {
+    boardDetail.createListCard({ listId: props.listId, title: value }).then((data: any) => {
+      boardDetail.getByIdBoardList({ boardListId: props.listId }).then((getList: any) => {
         boardDetailContext.dispatches.createListCard(props.listId, getList.data)
       })
     })
@@ -46,34 +48,36 @@ const BoardDetailListCard: FC<BoardDetailListCardProps> = (props) => {
   }
 
   const handleCloseModal = () => {
-      setSelectedCardId(0)
-      setShowModal(false)
+    setSelectedCardId(0)
+    setShowModal(false)
+    props.onUpdate?.()
   }
 
   const handleCardClick = (cardId: number) => {
     setSelectedCardId(cardId)
     setShowModal(true)
+    props.onUpdate?.()
   }
 
   return (
-    <div className='flex flex-col bg-gray-200  bg-white rounded-3xl border border-gray-200 shadow-md mr-4 w-72 h-max'>
+    <div className='flex flex-col bg-gray-200 bg-white rounded-3xl border border-gray-200 shadow-md mr-4 w-72 h-max'>
       <div className='flex justify-between p-4 pb-12'>
         <p className='font-medium'>{props.title}</p>
         <span className="material-symbols-outlined">more_vert</span>
 
       </div>
       <div>{
-        boardDetailContext.state.singleList.filter((list: any) => list.id === props.listId).map((singleList: any) => 
-           singleList.cards.map((card: any, key: any) => (
-            <BoardDetailModalCard key = {key} title = {card.title} onCardClick={() => {
+        boardDetailContext.state.singleList.filter((list: any) => list.id === props.listId).map((singleList: any) =>
+          singleList.cards.map((card: any, key: any) => (
+            <BoardDetailModalCard key={key} card={card} onCardClick={() => {
               handleCardClick?.(card.id)
-            }}/>
-           ))
+            }} />
+          ))
         )}
-        
+
         {
           showModal ? (
-            <Modal onUpdate = {handleUpdateModal} cardId={selectedCardId} onClose={handleCloseModal}/>
+            <Modal onUpdate={handleUpdateModal} cardId={selectedCardId} onClose={handleCloseModal} />
           ) : null
         }
       </div>

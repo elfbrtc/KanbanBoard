@@ -1,5 +1,5 @@
 import service from '../../instance'
-import { BoardsRequestPayload, CardChecklistItemRequestPayload, CardChecklistItemUpdateRequestPayload, CardChecklistRequestPayload, CardChecklistUpdateRequestPayload, CardCommentRequestPayload, CardLabelRequestPayload, ListCardRequestPayload } from './types'
+import { BoardsRequestPayload, CardChecklistItemRequestPayload, CardChecklistItemUpdateRequestPayload, CardChecklistRequestPayload, CardChecklistUpdateRequestPayload, CardCommentRequestPayload, CardLabelRequestPayload, CardUpdateRequestPayload, ListCardRequestPayload } from './types'
 
 export const updateBoardList = (payload: BoardsRequestPayload) =>
   service.put('list/' + payload.boardListId, payload, {
@@ -100,8 +100,10 @@ export const removeCardComment = (commentId: number) =>
   })
 
 
-
-
+export const updateDueDate = (payload: CardUpdateRequestPayload) =>  
+service.put('card/'+payload.boardId, payload, {
+  headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
+})
 
 
 

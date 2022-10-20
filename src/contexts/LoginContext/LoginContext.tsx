@@ -37,7 +37,7 @@ export const LoginProvider: FC<PropsWithChildren> = ({ children }) => {
       },
       (error) => {
         console.log("Error")      
-        if ([500, 401, 403].includes(error.response.status)) {
+        if ([401, 403].includes(error.response.status)) {
           logout()
           //Değiştirilebilir
           window.location.href = '/login'

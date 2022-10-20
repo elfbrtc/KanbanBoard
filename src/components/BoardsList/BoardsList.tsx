@@ -4,6 +4,7 @@ import './BoardsList.css'
 import BoardCard from '../BoardCard'
 import { useBoardsContext } from '../../contexts/BoardsContext/BoardsContext'
 import { BoardsListProps, BoardsListValuesProps } from './BoardsList.types'
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const BoardsList: FC<BoardsListProps> = (props) => {
 
@@ -30,26 +31,50 @@ const BoardsList: FC<BoardsListProps> = (props) => {
     // window.location.reload();
   }
 
+  const handleOnDragEnd = (result : any ) => {
+    if(!result.destination) return
+    const items = Array.from(boardsContext.state.boards)
+    const [reOrderItems] = items.splice(result.source.index, 1)
+    items.splice(result.destination.index, 0, reOrderItems)
+    boardsContext.state.boards = items 
+  }
+
   return (
 
     <Styled>
-      <div className="min-h-screen flex items-center justify-center ">
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-8 gap-4 p-5 elfogn'>
-          {boardsContext.state.boards.map((board, key) => (
-            <BoardCard
-              key={key}
-              icon="analytics"
-              text={board.title}
-              onClick={() => handleShowBoard(board)}></BoardCard>
-          ))}
-          <BoardCard
-            icon="add"
-            text="Ekle"
-            onClick={handleAddNewBoard}></BoardCard>
+      <DragDropContext onDragEnd={handleOnDragEnd}>
+        <Droppable droppableId='boardList'>
+          {(provided) => (
+            <div className="min-h-screen flex items-center justify-center" {...provided.droppableProps} ref={provided.innerRef}>
+              <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-8 gap-4 p-5'>
+                {boardsContext.state.boards.map((board: any, index: any) => (
+                  <Draggable key={board.id} draggableId={board.id.toString()} index={index}>
+                    {(provided) => (
+                      <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                        <BoardCard
+                          icon="analytics"
+                          text={board.title}
+                          onClick={() => handleShowBoard(board)} />
+                      </div>
 
-        </div>
-      </div>
-    </Styled>
+                    )}
+
+                  </Draggable>
+
+                ))}
+                {provided.placeholder}
+                <BoardCard
+                  icon="add"
+                  text="Ekle"
+                  onClick={handleAddNewBoard}></BoardCard>
+
+              </div>
+            </div>
+          )}
+        </Droppable>
+
+      </DragDropContext>
+    </Styled >
   )
 }
 export default BoardsList

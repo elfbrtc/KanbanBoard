@@ -1,13 +1,17 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { ModalLabelChipProps } from './ModalLabelChip.types'
 import { styled } from '@mui/material/styles';
 import Chip from '@mui/material/Chip';
 import Paper from '@mui/material/Paper';
 import TagFacesIcon from '@mui/icons-material/TagFaces';
+import { ModalCardType } from '../ModalTopBar/ModalTopBar.types';
+import { boardDetail } from '../../services/http/scrumboard/endpoints/boardDetail';
+import { useBoardDetailContext } from '../../contexts/BoardDetailContext/BoardDetailContext';
 
 interface ChipData {
   key: number;
   label: string;
+  color: string;
 }
 
 const ListItem = styled('li')(({ theme }) => ({
@@ -16,26 +20,41 @@ const ListItem = styled('li')(({ theme }) => ({
 
 const ModalLabelChip: FC<ModalLabelChipProps> = (props) => {
 
+  const boardDetailContext = useBoardDetailContext()
+
   const [chipData, setChipData] = React.useState<readonly ChipData[]>([
-    { key: 0, label: 'Angular' },
-    { key: 1, label: 'jQuery' },
-    { key: 2, label: 'Polymer' },
-    { key: 3, label: 'React' },
-    { key: 4, label: 'Vue.js' },
   ]);
+  const [card, setCard] = useState<ModalCardType>(props.card)
+
+  useEffect(() => {
+    const chipList : ChipData[] = []
+    card.labels.map((label: any) => {
+      chipList.push({
+        "key": label.CardLabel.id,
+        "label": label.title,
+        "color": label.color
+      })
+    })
+    setChipData(chipList)
+  }, [])
 
   const handleDelete = (chipToDelete: ChipData) => () => {
+    boardDetail.removeCardLabel(chipToDelete.key).then((labelResponse: any) => {
+      boardDetail.getByIdBoardList({boardListId: card.listId}).then((data: any) => {
+        boardDetailContext.dispatches.updateBoardList(data.data)
+      })
+    })
     setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
+    props.onRemoveItem?.()
   };
   
-
   return (
     <div className='p-4'>
       <div className='flex'>
       <span className='material-symbols-outlined mr-2'>label</span>
       <p className='font-bold'>Labels</p>
       </div>
-      <div>
+      <div className = 'mt-3'>
       <Paper
       sx={{
         display: 'flex',
@@ -59,6 +78,7 @@ const ModalLabelChip: FC<ModalLabelChipProps> = (props) => {
             <Chip
               icon={icon}
               label={data.label}
+              color= {data.color === 'red' ? "error" : undefined}
               onDelete={handleDelete(data)}
             />
           </ListItem>

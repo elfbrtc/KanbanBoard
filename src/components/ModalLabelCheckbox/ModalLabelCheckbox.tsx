@@ -17,6 +17,7 @@ const ModalLabelCheckbox: FC<ModalLabelCheckboxProps> = (props) => {
   const [isChecked, setIsChecked] = useState(false)
 
   useEffect(() => {
+    console.log(label)
     const isThere = card.labels.find((_label: any) => _label.id == label.id)
     if(isThere){
       setIsChecked(true)

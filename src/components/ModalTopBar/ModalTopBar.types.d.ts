@@ -4,6 +4,7 @@ export type ModalTopBarProps = {
   onCheckListClick?:() => void,
   onLabelClick?:() => void,
   onCloseClick?: () => void,
+  onChangeItem?: () => void
 }
 
 export type ModalCardType = {

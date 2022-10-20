@@ -2,6 +2,7 @@ export type BoardDetailProps = {
   boardListId?: number
   boardId: number,
   title?: string
+  onUpdate?:() => void
 
 }
 

@@ -37,6 +37,11 @@ export type CardChecklistItemUpdateRequestPayload = {
     isChecked: boolean
 }
 
+export type CardCommentRequestPayload = {
+    cardId: number,
+    message: string
+}
+
 export type ListCardReponseType = {
     data: {
         id: number,

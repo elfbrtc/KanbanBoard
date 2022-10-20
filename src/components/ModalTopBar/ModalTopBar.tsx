@@ -84,7 +84,7 @@ const ModalTopBar: FC<ModalTopBarProps> = (props) => {
             anchorEl={labelListanchorEl}
             onClose={handleLabelListClose}
             child= {boardDetailContext.state.labels.map((label: any, key: any) => (
-              <ModalLabelCheckbox key = {key} labelTitle={label.title}/>
+              <ModalLabelCheckbox card = {card} key = {key} label={label}/>
             ))} />
         </div>
         <span className="material-symbols-outlined text-white font-medium cursor-pointer" onClick={() => {

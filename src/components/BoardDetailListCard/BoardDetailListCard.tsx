@@ -19,7 +19,7 @@ const BoardDetailListCard: FC<BoardDetailListCardProps> = (props) => {
     setShowModal(false)
     setTimeout(function() {
       setShowModal(true)
-    }, 1);
+    });
     
   }
   const handleSetClicked = () => {

@@ -10,6 +10,9 @@ import { boardDetail } from '../../services/http/scrumboard/endpoints/boardDetai
 import { ModalCardType } from '../ModalTopBar/ModalTopBar.types'
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import ModalComment from '../ModalComment'
+import ModalCommentItem from '../ModalCommentItem'
+import ModalLabelChip from '../ModalLabelChip'
 
 const Modal: FC<ModalProps> = (props) => {
 
@@ -49,7 +52,7 @@ const Modal: FC<ModalProps> = (props) => {
     props.onClose?.()
   }
 
-  const handleAddChecklistItem = () => {
+  const handleAddNewItem = () => {
     const list = boardDetailContext.state.singleList.find((list: any) => list.cards.find((cList: any) => cList.id === card!!.id))
     const newCard = list?.cards.find((cList: any) => cList.id === card!!.id)
     setCard({...newCard})
@@ -68,19 +71,25 @@ const Modal: FC<ModalProps> = (props) => {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 <div className=''>
                   <ModalTopBar card={card} onCloseClick={handleOnCloseClick} onDueDateClick={handleOnDueDateClick} onCheckListClick={handleOnCheckListClick} onLabelClick={handleOnLabelClick} /></div>
-                <ModalTextField />
+                <ModalTextField value = {card!!.title} />
                 <ModalDescriptionTextField />
                 {
                   boardDetailContext.state.singleList &&
                   boardDetailContext.state.singleList.filter((list: any) => list.id === card!!.listId).map((singleList: any) =>
                     singleList.cards.filter((_card: any) => _card.id === card!!.id).map((singleCard: any) => (
                       singleCard.checklists.map((checklist: any, key: any) => (
-                        <ModalCheckList onAddChecklistItem = {handleAddChecklistItem} checklist = {checklist} key = {key} />
+                        <ModalCheckList onAddChecklistItem = {handleAddNewItem} checklist = {checklist} key = {key} />
                       ))
                     ))
                   )
                 }
-
+                {
+                  card?.labels && card?.labels.length > 0 ? (<ModalLabelChip/>) : null
+                }               
+                <ModalComment card = {card} onAddComment={handleAddNewItem}/>
+                {
+                  card?.comments.length > 0 ? (<ModalCommentItem card = {card} />) : null
+                }
                 <div className="flex items-start justify-between border-b border-solid border-slate-200 rounded-t">
 
 

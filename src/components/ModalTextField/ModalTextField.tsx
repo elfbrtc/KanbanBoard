@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
 
-const ModalTextField: FC<ModalTextFieldProps> = () => {
+const ModalTextField: FC<ModalTextFieldProps> = (props) => {
   return (
   <div className='p-4 pl-4' >
     <Box
@@ -15,7 +15,7 @@ const ModalTextField: FC<ModalTextFieldProps> = () => {
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" label="Title*" variant="outlined" />
+      <TextField value = {props.value} id="outlined-basic" label="Title*" variant="outlined" />
     </Box>
   </div>
   )
